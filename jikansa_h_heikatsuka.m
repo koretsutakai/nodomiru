@@ -14,7 +14,7 @@ window_size_LE = 300;
 
 
 
-for m = 1:17
+for m = 1:1
     foldername = sprintf('%d', m);
     for i = 1:1
         filename = fullfile(foldername, sprintf('%d.xlsx', i));
