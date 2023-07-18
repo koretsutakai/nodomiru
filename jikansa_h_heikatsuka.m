@@ -4,15 +4,9 @@ result = cell(100, 8);
 sampling_freq = 10000;  % サンプリング周波数 (Hz)
 index = 1;
 
-% border_SN_MMG = 0.2;
-% border_AD_BA = 0.005;
-% border_SN_BA = 0.01;
-% border_AD_LE = 0.18;
-% border_SN_LE = 0.15;
 window_size_MMG = 600;  % Smoothing window size
 window_size_BA = 1000;  % Smoothing window size
 window_size_LE = 300;
-% end_rest_time = 2.5;
 coefficient_AD_MMG = 2;
 coefficient_SN_MMG = 2;
 coefficient_AD_BA = 2;
@@ -22,7 +16,7 @@ coefficient_SN_LE = 2;
 
 for m = 1:17
     foldername = sprintf('%d', m);
-    for i = 1:1
+    for i = 1:5
         filename = fullfile(foldername, sprintf('%d.xlsx', i));
 
         if m == 4
@@ -290,4 +284,4 @@ end
 
 header = {'folder', 'File', 'max_acctive_AD_MMG', 'max_acctive_SN_MMG' 'max_acctive_AD_BA' 'max_acctive_SN_BA' 'max_acctive_AD_LE' 'max_acctive_SN_LE'};
 headerResult = [header; result];
-% writecell(headerResult, 'AcctiveTime.csv');
+writecell(headerResult, 'AcctiveTime.csv');
