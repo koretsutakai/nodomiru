@@ -100,6 +100,23 @@ for m = 1:17
         std_RT_SN_LE = std (RT_data_SN_LE);
         border_SN_LE = mean_RT_SN_LE + std_RT_SN_LE * coefficient_SN_LE ;
 
+        if m == 4
+            border_AD_MMG_5 = border_AD_MMG;
+            border_SN_MMG_5 = border_SN_MMG;
+            border_AD_BA_5 = border_AD_BA;
+            border_SN_BA_5 = border_SN_BA;
+            border_AD_LE_5 = border_AD_LE;
+            border_SN_LE_5 = border_SN_LE;
+        end
+
+        if m ==5
+            border_AD_MMG = border_AD_MMG_5;
+            border_SN_MMG = border_SN_MMG_5;
+            border_AD_BA = border_AD_BA_5;
+            border_SN_BA = border_SN_BA_5;
+            border_AD_LE = border_AD_LE_5;
+            border_SN_LE = border_SN_LE_5;
+        end
 
         % 閾値を連続して超える区間を取得
         AD_MMG_over_threshold = AD_MMG_smoothed > border_AD_MMG;
@@ -284,4 +301,4 @@ end
 
 header = {'folder', 'File', 'max_acctive_AD_MMG', 'max_acctive_SN_MMG' 'max_acctive_AD_BA' 'max_acctive_SN_BA' 'max_acctive_AD_LE' 'max_acctive_SN_LE'};
 headerResult = [header; result];
-writecell(headerResult, 'AcctiveTime.csv');
+writecell(headerResult, 'AcctiveTime_RT_0725.csv');
