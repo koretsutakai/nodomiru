@@ -1,5 +1,6 @@
 close all;
 clear;
+raw_data = cell(100, 8);
 result = cell(100, 8);
 sampling_freq = 10000;  % サンプリング周波数 (Hz)
 index = 1;
@@ -14,9 +15,11 @@ coefficient_SN_BA = 2;
 coefficient_AD_LE = 2;
 coefficient_SN_LE = 2;
 
-for m = 1:17
+for m = 1:1
+
+
     foldername = sprintf('%d', m);
-    for i = 1:5
+    for i = 1:1
         filename = fullfile(foldername, sprintf('%d.xlsx', i));
 
         if m == 4
@@ -70,6 +73,21 @@ for m = 1:17
         AD_LE_smoothed = movmean(AD_LE_envelope, window_size_LE);
         SN_LE_smoothed = movmean(SN_LE_envelope, window_size_LE);
 
+        raw_data{index, 1} = m;
+        raw_data{index, 2} = i;
+        raw_data{index, 3} = AD_MMG;
+        raw_data{index, 4} = SN_MMG;
+        raw_data{index, 5} = AD_BA;
+        raw_data{index, 6} = SN_BA;
+        raw_data{index, 7} = AD_LE;
+        raw_data{index, 8} = SN_LE;
+
+        enveloped_data = raw_data;
+        enveloped_data(: ,3:8) = envelope(enveloped_data(: ,3:8));
+
+
+
+
         RT_data_AD_MMG = AD_MMG_smoothed(1:endi_RT_AD_MMG);
         mean_RT_AD_MMG = mean (RT_data_AD_MMG);
         std_RT_AD_MMG = std (RT_data_AD_MMG);
@@ -100,8 +118,10 @@ for m = 1:17
         std_RT_SN_LE = std (RT_data_SN_LE);
         border_SN_LE = mean_RT_SN_LE + std_RT_SN_LE * coefficient_SN_LE ;
 
+
+
         if m == 4
-            border_AD_MMG_5 = border_AD_MMG;
+            border_AD_MMG_ = border_AD_MMG;
             border_SN_MMG_5 = border_SN_MMG;
             border_AD_BA_5 = border_AD_BA;
             border_SN_BA_5 = border_SN_BA;
